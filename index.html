@@ -148,7 +148,7 @@
             color: #ff7b7b;
         }
 
-        /* Lưới các nút liên kết social (3 cột tròn 9 nút) */
+        /* Lưới các nút liên kết social (3 cột) */
         .links-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -183,10 +183,16 @@
         /* Responsive cho điện thoại nhỏ */
         @media (max-width: 520px) {
             .links-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            .social-btn {
+                padding: 10px 4px;
+                font-size: 11px;
+                gap: 4px;
             }
             .info-label {
-                width: 100px;
+                width: 90px;
             }
         }
     </style>
@@ -196,9 +202,9 @@
     <div class="container">
         <!-- Bộ chuyển đổi ngôn ngữ -->
         <div class="lang-switch">
-            <button class="lang-btn active" onclick="changeLang('vi')">VIE</button>
-            <button class="lang-btn" onclick="changeLang('en')">ENG</button>
-            <button class="lang-btn" onclick="changeLang('zh')">ZHO</button>
+            <button class="lang-btn active" onclick="changeLang('vi', this)">VIE</button>
+            <button class="lang-btn" onclick="changeLang('en', this)">ENG</button>
+            <button class="lang-btn" onclick="changeLang('zh', this)">ZHO</button>
         </div>
 
         <!-- Ảnh đại diện nổi ở giữa mép trên -->
@@ -229,7 +235,7 @@
             </div>
         </div>
 
-        <!-- Nút mạng xã hội (3 cột - 9 nút tròn trịa) -->
+        <!-- Nút mạng xã hội (3 cột - 9 nút) -->
         <div class="links-grid">
             <a href="https://www.facebook.com/pham.hung.427949" target="_blank" class="social-btn">
                 <i class="fa-brands fa-facebook"></i> Facebook
@@ -250,13 +256,13 @@
                 <i class="fa-brands fa-instagram"></i> Instagram
             </a>
             <a href="https://space.bilibili.com" target="_blank" class="social-btn">
-                <i class="fa-solid fa-tv"></i> Bilibili (<span class="btn-bili-dom">Nội địa</span>)
+                <i class="fa-solid fa-tv"></i> Bilibili-C
             </a>
             <a href="https://www.bilibili.tv" target="_blank" class="social-btn">
-                <i class="fa-solid fa-globe"></i> Bilibili (<span class="btn-bili-int">Quốc tế</span>)
+                <i class="fa-solid fa-globe"></i> Bilibili-G
             </a>
             <a href="https://www.douyin.com" target="_blank" class="social-btn">
-                <i class="fa-brands fa-tiktok"></i> Douyin (<span class="btn-douyin">Nội địa</span>)
+                <i class="fa-brands fa-tiktok"></i> Douyin
             </a>
         </div>
     </div>
@@ -270,10 +276,7 @@
                 nameLbl: "tên",
                 nameVal: "Hùng",
                 bgLbl: "Thiết kế bối cảnh",
-                bgVal: "Đường nâu",
-                biliDom: "Nội địa",
-                biliInt: "Quốc tế",
-                douyin:
+                bgVal: "Đường nâu"
             },
             en: {
                 title: "About Me",
@@ -282,10 +285,7 @@
                 nameLbl: "Name",
                 nameVal: "Hung",
                 bgLbl: "Background Concept",
-                bgVal: "Brown Sugar",
-                biliDom: "Domestic",
-                biliInt: "Global",
-                douyin:
+                bgVal: "Brown Sugar"
             },
             zh: {
                 title: "自我介绍",
@@ -294,15 +294,12 @@
                 nameLbl: "姓名",
                 nameVal: "雄 (Hung)",
                 bgLbl: "背景设计",
-                bgVal: "黑糖 / 红糖",
-                biliDom: "国服",
-                biliInt: "国际服",
-                douyin:
+                bgVal: "黑糖 / 红糖"
             }
         };
 
-        function changeLang(lang) {
-            // Đổi text
+        function changeLang(lang, btnElement) {
+            // Cập nhật text
             document.getElementById('txt-title').innerText = translations[lang].title;
             document.getElementById('lbl-intro').innerText = translations[lang].introLbl;
             document.getElementById('val-intro').innerText = translations[lang].introVal;
@@ -311,14 +308,12 @@
             document.getElementById('lbl-bg').innerText = translations[lang].bgLbl;
             document.getElementById('val-bg').innerText = translations[lang].bgVal;
 
-            document.querySelector('.btn-bili-dom').innerText = translations[lang].biliDom;
-            document.querySelector('.btn-bili-int').innerText = translations[lang].biliInt;
-            document.querySelector('.btn-douyin').innerText = translations[lang].douyin;
-
-            // Đổi active button
+            // Đổi màu nút ngôn ngữ active
             const buttons = document.querySelectorAll('.lang-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            buttons.forEach(b => b.classList.remove('active'));
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
         }
     </script>
 </body>
