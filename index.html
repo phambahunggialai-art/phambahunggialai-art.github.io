@@ -5,18 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang cá nhân của Hùng</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f4f9; text-align: center; padding: 50px; }
-        .card { background: white; padding: 30px; border-radius: 15px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 350px; width: 100%; }
-        h1 { margin: 15px 0 5px; color: #333; font-size: 24px; }
-        p { color: #666; margin-bottom: 20px; }
-        .links a { display: block; margin: 10px 0; padding: 12px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: 0.3s; }
-        .links a:hover { background: #0056b3; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background: #0f0f12; 
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px; 
+        }
+        .card { 
+            background: #18181c; 
+            padding: 35px 25px; 
+            border-radius: 20px; 
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(220, 38, 38, 0.15); 
+            max-width: 380px; 
+            width: 100%; 
+            border: 1px solid #2a2a32;
+        }
+        /* Khung ảnh đại diện */
+        .avatar-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+        }
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #dc2626; /* Đường viền đỏ nhấn nhá */
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
+        }
+        h1 { 
+            margin-bottom: 8px; 
+            color: #ffffff; 
+            font-size: 24px; 
+            font-weight: 700;
+        }
+        p { 
+            color: #a1a1aa; 
+            margin-bottom: 25px; 
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .links a { 
+            display: block; 
+            margin: 12px 0; 
+            padding: 14px 20px; 
+            background: #23232a; 
+            color: #ffffff; 
+            text-decoration: none; 
+            border-radius: 12px; 
+            font-weight: 600; 
+            font-size: 15px;
+            border: 1px solid #33333e;
+            transition: all 0.3s ease; 
+        }
+        /* Hiệu ứng rê chuột vào nút có ánh đỏ "outfit" ngầu đét */
+        .links a:hover { 
+            background: #dc2626; 
+            border-color: #ef4444;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
     <div class="card">
+        <!-- Chỗ chen ảnh đại diện nè ní -->
+        <div class="avatar-container">
+            <img class="avatar" src="https://via.placeholder.com/120" alt="Ảnh đại diện của Hùng">
+        </div>
+
         <h1>Xin chào, mình là Hùng!</h1>
-        <p>Thích mày mò công nghệ & làm những thứ hay ho :)))))</p>
+        <p>Thích mày mò công nghệ & làm những thứ "hay ho" :)))))</p>
+
         <div class="links">
             <a href="https://www.facebook.com/pham.hung.427949" target="_blank">Facebook</a>
             <a href="https://www.tiktok.com/@hungpham.70" target="_blank">TikTok</a>
