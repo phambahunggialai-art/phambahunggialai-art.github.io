@@ -3,99 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang cá nhân của Hùng</title>
+    <title>Tự giới thiệu - Hùng</title>
+    <!-- Thêm thư viện Icon FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            background: #0f0f12; 
-            color: #e0e0e0;
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            /* Nền đen có hiệu ứng vệt sáng đỏ nâu mờ phía trên giống ảnh mẫu */
+            background: #0d0908 radial-gradient(circle at 50% 10%, rgba(120, 35, 25, 0.35) 0%, rgba(13, 9, 8, 1) 70%);
+            color: #e5e5e5;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px; 
+            padding: 40px 20px;
         }
-        .card { 
-            background: #18181c; 
-            padding: 35px 25px; 
-            border-radius: 20px; 
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(220, 38, 38, 0.15); 
-            max-width: 380px; 
-            width: 100%; 
-            border: 1px solid #2a2a32;
-        }
-        /* Khung ảnh đại diện */
-        .avatar-container {
+
+        /* Card chính */
+        .container {
             position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
+            background: rgba(28, 20, 20, 0.75);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 28px;
+            padding: 50px 35px 35px;
+            max-width: 520px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6),
+                        0 0 30px rgba(120, 35, 25, 0.15);
+            margin-top: 40px; /* Tạo khoảng trống cho Avatar trôi lên */
         }
-        .avatar {
+
+        /* Avatar đè lên mép trên */
+        .avatar-box {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, #ff6b6b, #4a1515);
+            box-shadow: 0 0 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .avatar-box img {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #dc2626; /* Đường viền đỏ nhấn nhá */
-            box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
+            background: #1c1414;
         }
-        h1 { 
-            margin-bottom: 8px; 
-            color: #ffffff; 
-            font-size: 24px; 
+
+        /* Tiêu đề */
+        .title {
+            font-size: 22px;
             font-weight: 700;
+            color: #ff7b7b;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        p { 
-            color: #a1a1aa; 
-            margin-bottom: 25px; 
+
+        .title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 22px;
+            background-color: #ff4d4d;
+            border-radius: 2px;
+        }
+
+        /* Danh sách thông tin dạng hàng */
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            background: rgba(45, 32, 32, 0.4);
+            border-radius: 14px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
             font-size: 14px;
-            line-height: 1.5;
         }
-        .links a { 
-            display: block; 
-            margin: 12px 0; 
-            padding: 14px 20px; 
-            background: #23232a; 
-            color: #ffffff; 
-            text-decoration: none; 
-            border-radius: 12px; 
-            font-weight: 600; 
-            font-size: 15px;
-            border: 1px solid #33333e;
-            transition: all 0.3s ease; 
+
+        .info-label {
+            color: #ff6b6b;
+            font-weight: 700;
+            width: 120px;
+            flex-shrink: 0;
         }
-        /* Hiệu ứng rê chuột vào nút có ánh đỏ "outfit" ngầu đét */
-        .links a:hover { 
-            background: #dc2626; 
-            border-color: #ef4444;
+
+        .info-value {
+            color: #d1d1d1;
+            flex-grow: 1;
+        }
+
+        /* Lưới các nút liên kết social (3 cột giống ảnh) */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .social-btn {
+            background: rgba(45, 32, 32, 0.5);
             color: #ffffff;
-            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+            text-decoration: none;
+            padding: 12px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.25s ease;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 107, 107, 0.15);
+            border-color: rgba(255, 107, 107, 0.4);
+            color: #ff7b7b;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive cho điện thoại nhỏ */
+        @media (max-width: 480px) {
+            .links-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .info-label {
+                width: 90px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <!-- Chỗ chen ảnh đại diện nè ní -->
-        <div class="avatar-container">
-            <img class="avatar" src="https://via.placeholder.com/120" alt="Ảnh đại diện của Hùng">
+
+    <div class="container">
+        <!-- Ảnh đại diện nổi ở giữa mép trên -->
+        <div class="avatar-box">
+            <img src="https://via.placeholder.com/100" alt="Avatar Hùng">
         </div>
 
-        <h1>Xin chào, mình là Hùng!</h1>
-        <p>Thích mày mò công nghệ & làm những thứ "hay ho" :)))))</p>
+        <!-- Tiêu đề -->
+        <div class="title">Tự giới thiệu</div>
 
-        <div class="links">
-            <a href="https://www.facebook.com/pham.hung.427949" target="_blank">Facebook</a>
-            <a href="https://www.tiktok.com/@hungpham.70" target="_blank">TikTok</a>
-            <a href="https://www.youtube.com/@HungPham-bn5nr" target="_blank">YouTube</a>
-            <a href="https://github.com/phambahunggialai-art" target="_blank">GitHub</a>
+        <!-- Khối thông tin -->
+        <div class="info-list">
+            <div class="info-item">
+                <span class="info-label">Giới thiệu</span>
+                <span class="info-value">Thích mày mò công nghệ & làm những thứ hay ho :)))))</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">tên</span>
+                <span class="info-value">Hùng</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Thiết kế bối cảnh</span>
+                <span class="info-value">Đường nâu</span>
+            </div>
+        </div>
+
+        <!-- Nút mạng xã hội (3 cột) -->
+        <div class="links-grid">
+            <a href="https://www.facebook.com/pham.hung.427949" target="_blank" class="social-btn">
+                <i class="fa-brands fa-facebook"></i> Facebook
+            </a>
+            <a href="https://www.tiktok.com/@hungpham.70" target="_blank" class="social-btn">
+                <i class="fa-brands fa-tiktok"></i> TikTok
+            </a>
+            <a href="https://www.youtube.com/@HungPham-bn5nr" target="_blank" class="social-btn">
+                <i class="fa-brands fa-youtube"></i> YouTube
+            </a>
+            <a href="https://github.com/phambahunggialai-art" target="_blank" class="social-btn">
+                <i class="fa-brands fa-github"></i> GitHub
+            </a>
+            <a href="#" target="_blank" class="social-btn">
+                <i class="fa-brands fa-x-twitter"></i> X (Twitter)
+            </a>
+            <a href="#" target="_blank" class="social-btn">
+                <i class="fa-brands fa-instagram"></i> Instagram
+            </a>
         </div>
     </div>
+
 </body>
 </html>
