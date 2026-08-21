@@ -39,6 +39,33 @@
             margin-top: 40px;
         }
 
+        /* Nút chuyển đổi ngôn ngữ */
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 6px;
+        }
+
+        .lang-btn {
+            background: rgba(45, 32, 32, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a0a0a0;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: #ff4d4d;
+            color: #ffffff;
+            border-color: #ff4d4d;
+        }
+
         /* Avatar đè lên mép trên */
         .avatar-box {
             position: absolute;
@@ -70,6 +97,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            margin-top: 10px;
         }
 
         .title::before {
@@ -101,7 +129,7 @@
         .info-label {
             color: #ff6b6b;
             font-weight: 700;
-            width: 120px;
+            width: 130px;
             flex-shrink: 0;
         }
 
@@ -110,7 +138,17 @@
             flex-grow: 1;
         }
 
-        /* Lưới các nút liên kết social (3 cột) */
+        .info-value a {
+            color: #d1d1d1;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .info-value a:hover {
+            color: #ff7b7b;
+        }
+
+        /* Lưới các nút liên kết social (3 cột tròn 9 nút) */
         .links-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -148,7 +186,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             .info-label {
-                width: 90px;
+                width: 100px;
             }
         }
     </style>
@@ -156,31 +194,42 @@
 <body>
 
     <div class="container">
+        <!-- Bộ chuyển đổi ngôn ngữ -->
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="changeLang('vi')">VIE</button>
+            <button class="lang-btn" onclick="changeLang('en')">ENG</button>
+            <button class="lang-btn" onclick="changeLang('zh')">ZHO</button>
+        </div>
+
         <!-- Ảnh đại diện nổi ở giữa mép trên -->
         <div class="avatar-box">
             <img src="mèo.jpg" alt="Avatar Hùng">
         </div>
 
         <!-- Tiêu đề -->
-        <div class="title">Tự giới thiệu</div>
+        <div class="title" id="txt-title">Tự giới thiệu</div>
 
         <!-- Khối thông tin -->
         <div class="info-list">
             <div class="info-item">
-                <span class="info-label">Giới thiệu</span>
-                <span class="info-value">Thích mày mò công nghệ & làm những thứ hay ho :)))))</span>
+                <span class="info-label" id="lbl-intro">Giới thiệu</span>
+                <span class="info-value" id="val-intro">Thích mày mò công nghệ & làm những thứ hay ho :)))))</span>
             </div>
             <div class="info-item">
-                <span class="info-label">tên</span>
-                <span class="info-value">Hùng</span>
+                <span class="info-label" id="lbl-name">tên</span>
+                <span class="info-value" id="val-name">Hùng</span>
             </div>
             <div class="info-item">
-                <span class="info-label">Thiết kế bối cảnh</span>
-                <span class="info-value">Đường nâu</span>
+                <span class="info-label" id="lbl-bg">Thiết kế bối cảnh</span>
+                <span class="info-value" id="val-bg">Đường nâu</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label" id="lbl-gmail">Gmail</span>
+                <span class="info-value" id="val-gmail"><a href="mailto:phambahunggialai@gmail.com">phambahunggialai@gmail.com</a></span>
             </div>
         </div>
 
-        <!-- Nút mạng xã hội (3 cột) -->
+        <!-- Nút mạng xã hội (3 cột - 9 nút tròn trịa) -->
         <div class="links-grid">
             <a href="https://www.facebook.com/pham.hung.427949" target="_blank" class="social-btn">
                 <i class="fa-brands fa-facebook"></i> Facebook
@@ -194,9 +243,6 @@
             <a href="https://github.com/phambahunggialai-art" target="_blank" class="social-btn">
                 <i class="fa-brands fa-github"></i> GitHub
             </a>
-            <a href="mailto:email-cua-hung@gmail.com" class="social-btn">
-                <i class="fa-solid fa-envelope"></i> Gmail
-            </a>
             <a href="#" target="_blank" class="social-btn">
                 <i class="fa-brands fa-x-twitter"></i> X (Twitter)
             </a>
@@ -204,16 +250,76 @@
                 <i class="fa-brands fa-instagram"></i> Instagram
             </a>
             <a href="https://space.bilibili.com" target="_blank" class="social-btn">
-                <i class="fa-solid fa-tv"></i> Bilibili (Nội địa trung)
+                <i class="fa-solid fa-tv"></i> Bilibili (<span class="btn-bili-dom">Nội địa</span>)
             </a>
             <a href="https://www.bilibili.tv" target="_blank" class="social-btn">
-                <i class="fa-solid fa-globe"></i> Bilibili (Quốc tế)
+                <i class="fa-solid fa-globe"></i> Bilibili (<span class="btn-bili-int">Quốc tế</span>)
             </a>
             <a href="https://www.douyin.com" target="_blank" class="social-btn">
-                <i class="fa-brands fa-tiktok"></i> Douyin
+                <i class="fa-brands fa-tiktok"></i> Douyin (<span class="btn-douyin">Nội địa</span>)
             </a>
         </div>
     </div>
 
+    <script>
+        const translations = {
+            vi: {
+                title: "Tự giới thiệu",
+                introLbl: "Giới thiệu",
+                introVal: "Thích mày mò công nghệ & làm những thứ hay ho :)))))",
+                nameLbl: "tên",
+                nameVal: "Hùng",
+                bgLbl: "Thiết kế bối cảnh",
+                bgVal: "Đường nâu",
+                biliDom: "Nội địa",
+                biliInt: "Quốc tế",
+                douyin:
+            },
+            en: {
+                title: "About Me",
+                introLbl: "Bio",
+                introVal: "Passionate about tech & making cool stuff :)))))",
+                nameLbl: "Name",
+                nameVal: "Hung",
+                bgLbl: "Background Concept",
+                bgVal: "Brown Sugar",
+                biliDom: "Domestic",
+                biliInt: "Global",
+                douyin:
+            },
+            zh: {
+                title: "自我介绍",
+                introLbl: "简介",
+                introVal: "喜欢探索科技 & 做些有趣的事 :)))))",
+                nameLbl: "姓名",
+                nameVal: "雄 (Hung)",
+                bgLbl: "背景设计",
+                bgVal: "黑糖 / 红糖",
+                biliDom: "国服",
+                biliInt: "国际服",
+                douyin:
+            }
+        };
+
+        function changeLang(lang) {
+            // Đổi text
+            document.getElementById('txt-title').innerText = translations[lang].title;
+            document.getElementById('lbl-intro').innerText = translations[lang].introLbl;
+            document.getElementById('val-intro').innerText = translations[lang].introVal;
+            document.getElementById('lbl-name').innerText = translations[lang].nameLbl;
+            document.getElementById('val-name').innerText = translations[lang].nameVal;
+            document.getElementById('lbl-bg').innerText = translations[lang].bgLbl;
+            document.getElementById('val-bg').innerText = translations[lang].bgVal;
+
+            document.querySelector('.btn-bili-dom').innerText = translations[lang].biliDom;
+            document.querySelector('.btn-bili-int').innerText = translations[lang].biliInt;
+            document.querySelector('.btn-douyin').innerText = translations[lang].douyin;
+
+            // Đổi active button
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
 </body>
 </html>
